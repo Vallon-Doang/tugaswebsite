@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelompok 10 — Cinematography Masterclass</title>
+  <meta name="description" content="Studi Kasus 10: Psychological Low Angle Camera & Teknik Panning dalam Adegan Dialog — Departemen Sinematografi" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">K10<span>.</span>cinema</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#studi-kasus">Studi Kasus 10</a></li>
+        <li><a href="#panning">Teknik Panning</a></li>
+        <li><a href="#gerak">Kendali Gerak</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="hero">
+    <div class="hero-bg" id="heroBg">
+      <div class="layer layer-grain" data-speed="0.02"></div>
+      <div class="layer layer-glow glow-cyan" data-speed="0.15"></div>
+      <div class="layer layer-glow glow-navy" data-speed="0.25"></div>
+      <div class="layer" data-speed="0.4">
+        <div class="filmstrip strip-a"></div>
+        <div class="filmstrip strip-b"></div>
+      </div>
+      <canvas class="layer" id="particles" data-speed="0.08"></canvas>
+    </div>
+
+    <div class="hero-content" id="heroContent">
+      <p class="hero-eyebrow" data-reveal>Departemen Sinematografi · Studi Kasus 10</p>
+      <h1 class="hero-title" data-reveal>
+        <span class="line">Kelompok 10</span>
+        <span class="line line-accent">Cinematography</span>
+        <span class="line">Masterclass</span>
+      </h1>
+      <p class="hero-sub" data-reveal>
+        Mendekonstruksi <strong>Low Angle Camera</strong> sebagai bahasa kekuasaan,
+        dan <strong>Panning</strong> sebagai ritme dialog — dua teknik, satu bahasa visual.
+      </p>
+      <div class="hero-cta" data-reveal>
+        <a href="#studi-kasus" class="btn btn-primary">Mulai Eksplorasi</a>
+        <a href="#panning" class="btn btn-ghost">Teknis Panning</a>
+      </div>
+    </div>
+
+    <!-- Interactive angle toggles -->
+    <div class="hero-toggles" data-reveal>
+      <span class="hero-toggles-label">Pratinjau sudut kamera:</span>
+      <div class="toggle-group" id="angleToggle">
+        <button class="toggle-btn is-active" data-angle="low">Low Angle</button>
+        <button class="toggle-btn" data-angle="eye">Eye Level</button>
+      </div>
+      <p class="hero-toggle-note" id="angleNote">Kamera di bawah garis mata — subjek tampak dominan &amp; berkuasa.</p>
+    </div>
+
+    <a class="scroll-cue" href="#studi-kasus" aria-label="Scroll ke bawah"><span></span></a>
+  </header>
+
+  <!-- ===== SECTION 1: STUDI KASUS — LOW ANGLE ===== -->
+  <section class="section" id="studi-kasus">
+    <div class="section-head" data-reveal>
+      <p class="kicker">Studi Kasus 10</p>
+      <h2>Low Angle: <em>Kamera yang Berbicara tentang Kekuasaan</em></h2>
+      <p class="lede">
+        Low Angle Shot adalah sudut kamera yang diposisikan <strong>di bawah garis mata subjek</strong>,
+        mengarah ke atas. Tanpa satu dialog pun, framing ini langsung menyampaikan
+        hierarki, dominasi, dan skala.
+      </p>
+    </div>
+
+    <div class="duo">
+      <!-- Interactive diagram -->
+      <article class="card card-diagram" data-reveal data-parallax="0.06">
+        <div class="card-tag">Diagram Interaktif</div>
+        <div class="diagram" id="diagram">
+          <svg viewBox="0 0 400 300" class="diagram-svg" aria-hidden="true">
+            <!-- floor -->
+            <line x1="20" y1="260" x2="380" y2="260" class="d-floor" />
+            <!-- audience / receiver -->
+            <g class="d-audience">
+              <circle cx="80" cy="212" r="12" />
+              <rect x="70" y="226" width="20" height="34" rx="7" />
+              <text x="80" y="285" class="d-label">Audience</text>
+            </g>
+            <!-- speaker on podium -->
+            <g class="d-speaker">
+              <rect x="300" y="236" width="64" height="24" rx="4" class="d-podium" />
+              <circle cx="332" cy="120" r="17" />
+              <rect x="318" y="140" width="28" height="52" rx="10" />
+              <rect x="322" y="192" width="20" height="44" rx="8" />
+              <text x="332" y="285" class="d-label">Subject</text>
+            </g>
+            <!-- camera: two positions toggled by CSS class on #diagram -->
+            <g class="d-cam cam-low">
+              <rect x="96" y="238" width="30" height="18" rx="4" class="d-cambody" />
+              <rect x="126" y="242" width="10" height="10" rx="2" class="d-camlens" />
+              <path d="M 140 244 L 305 175" class="d-ray" />
+              <path d="M 305 175 l -14 -2 m 14 2 l -6 13" class="d-ray" />
+              <text x="105" y="230" class="d-label d-label-cam">CAM ↓↑</text>
+            </g>
+            <g class="d-cam cam-eye">
+              <rect x="150" y="176" width="30" height="18" rx="4" class="d-cambody" />
+              <rect x="180" y="180" width="10" height="10" rx="2" class="d-camlens" />
+              <path d="M 194 186 L 305 168" class="d-ray" />
+              <text x="158" y="168" class="d-label d-label-cam">CAM →</text>
+            </g>
+          </svg>
+          <p class="diagram-caption" id="diagramCaption">
+            <strong>Low Angle:</strong> di bawah titik pandang penerima (mis. siswa yang duduk),
+            lensa mengarah ke atas ke wajah, dada &amp; bahu — subjek menempati bidang atas frame.
+          </p>
+        </div>
+      </article>
+
+      <!-- Psychology cards -->
+      <div class="stack">
+        <article class="card card-mini" data-reveal data-parallax="0.03">
+          <div class="card-icon">⚖</div>
+          <h3>Power Asymmetry</h3>
+          <p>Subjek langsung terlihat <em>dominan</em>; penonton merasa lebih kecil dan subordinat.
+          Ketimpangan kekuatan hadir secara visual sebelum kata pertama diucapkan.</p>
+        </article>
+        <article class="card card-mini" data-reveal data-parallax="0.05">
+          <div class="card-icon">⚡</div>
+          <h3>Atmospheric Tension</h3>
+          <p>Membangun rasa <em>hormat, kagum, dan ketegangan</em> dalam pidato berisiko tinggi
+          atau adegan konfrontasi.</p>
+        </article>
+        <article class="card card-mini" data-reveal data-parallax="0.07">
+          <div class="card-icon">✦</div>
+          <h3>Implicit Narrative</h3>
+          <p>Hierarki sosial dan dinamika kuasa tersampaikan <em>tanpa dialog</em> —
+          framing berbicara, penonton yang mendengar.</p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Framing strip -->
+    <div class="framing" data-reveal>
+      <div class="framing-item" data-parallax="0.04">
+        <div class="framing-frame frame-low">
+          <div class="ff-subject"></div>
+          <span class="ff-label">Subjek di bidang atas frame → skala &amp; kepentingan membesar</span>
+        </div>
+        <h4>Height Placement</h4>
+        <p>Di bawah garis mata penerima — dari vantage point penonton yang duduk.</p>
+      </div>
+      <div class="framing-item" data-parallax="0.08">
+        <div class="framing-frame frame-lens">
+          <div class="ff-subject"></div>
+          <span class="ff-label">Wajah · Dada · Bahu</span>
+        </div>
+        <h4>Lens Orientation</h4>
+        <p>Lensa mengarah ke atas menuju wajah, dada, dan bahu pembicara.</p>
+      </div>
+      <div class="framing-item" data-parallax="0.12">
+        <div class="framing-frame frame-top">
+          <div class="ff-subject"></div>
+          <span class="ff-label">Bidang atas frame didominasi subjek</span>
+        </div>
+        <h4>Compositional Framing</h4>
+        <p>Menempatkan subjek di bagian atas frame untuk menguasai medan visual atas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: PANNING ===== -->
+  <section class="section section-alt" id="panning">
+    <div class="parallax-band" data-parallax="0.2">
+      <p>“Kamera berputar — cerita mengalir.”</p>
+    </div>
+
+    <div class="section-head" data-reveal>
+      <p class="kicker">Teknik Sinematografi</p>
+      <h2>Panning: <em>Ritme Kamera dalam Adegan Dialog</em></h2>
+      <p class="lede">
+        <strong>Panning</strong> adalah rotasi horizontal kamera pada sumbu vertikal tetap.
+        Fungsinya: mengarahkan fokus penonton mengikuti alur dialog antar tokoh,
+        menjaga kesinambungan ruang, dan menghindari jump-cut yang kasar.
+      </p>
+    </div>
+
+    <!-- Step slider -->
+    <div class="stepper card" data-reveal>
+      <div class="stepper-track">
+        <div class="stepper-progress" id="stepProgress"></div>
+        <button class="step-dot is-active" data-step="0" aria-label="Langkah 1"><span>1</span><em>Tripod Setup</em></button>
+        <button class="step-dot" data-step="1" aria-label="Langkah 2"><span>2</span><em>Axis Lock</em></button>
+        <button class="step-dot" data-step="2" aria-label="Langkah 3"><span>3</span><em>Pivot Execution</em></button>
+      </div>
+
+      <div class="stepper-body">
+        <div class="stepper-visual">
+          <svg viewBox="0 0 320 240" class="step-svg" aria-hidden="true">
+            <!-- tripod top view -->
+            <g class="sv-tripod">
+              <circle cx="160" cy="120" r="46" class="s-head" id="svHead" />
+              <path d="M 160 120 L 96 196" class="s-leg" />
+              <path d="M 160 120 L 224 196" class="s-leg" />
+              <path d="M 160 120 L 160 58" class="s-leg" />
+              <circle cx="160" cy="120" r="6" class="s-pivot" />
+            </g>
+            <!-- vertical tilt lock -->
+            <g class="sv-lock" id="svLock">
+              <rect x="120" y="36" width="80" height="26" rx="13" class="s-lockbody" />
+              <text x="160" y="54" class="s-locktext">TILT ✕ LOCKED</text>
+            </g>
+            <!-- pan sweep -->
+            <g class="sv-sweep" id="svSweep">
+              <path d="M 160 120 L 262 82 A 108 108 0 0 1 262 158 Z" class="s-sweep" />
+              <path d="M 160 120 L 248 106" class="s-arrow" />
+              <path d="M 248 106 l -12 -7 m 12 7 l -11 8" class="s-arrow" />
+            </g>
+            <!-- dialog characters -->
+            <circle cx="290" cy="70" r="9" class="s-char" />
+            <circle cx="290" cy="170" r="9" class="s-char" />
+            <text x="290" y="42" class="d-label">A</text>
+            <text x="290" y="205" class="d-label">B</text>
+          </svg>
+        </div>
+
+        <div class="stepper-text">
+          <p class="step-count" id="stepCount">Langkah 1 / 3</p>
+          <h3 id="stepTitle">Tripod Setup</h3>
+          <p id="stepDesc">
+            Pasang kamera pada <strong>tripod kokoh berkepala fluid head</strong> agar resistansi
+            seragam dan nol guncangan selama gerakan horizontal.
+          </p>
+          <ul class="step-tips" id="stepTips"></ul>
+          <div class="stepper-nav">
+            <button class="btn btn-ghost btn-sm" id="stepPrev">← Sebelumnya</button>
+            <button class="btn btn-primary btn-sm" id="stepNext">Lanjut →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fixed pivot principle -->
+    <div class="principle" data-reveal>
+      <article class="card card-mini">
+        <h3>⟲ Poros Tetap</h3>
+        <p>Rotasi murni horizontal pada <em>nodal center</em> kamera — posisi tripod tidak berubah.
+        Field of view berubah hanya karena orientasi lensa.</p>
+      </article>
+      <article class="card card-mini">
+        <h3>▦ Ruang Terjaga</h3>
+        <p>Jarak, skala, dan kedalaman latar tetap <em>dapat diprediksi</em> —
+        keseimbangan adegan dan geometri framing terpelihara.</p>
+      </article>
+      <article class="card card-mini">
+        <h3>⚑ Kontinuitas</h3>
+        <p>Hubungan spasial tokoh &amp; latar utuh; transisi antar pembicara terasa
+        <em>mulus, tidak patah</em>.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: MOTION CONTROL ===== -->
+  <section class="section" id="gerak">
+    <div class="section-head" data-reveal>
+      <p class="kicker">Smoothness &amp; Motion Control</p>
+      <h2>Gerak yang <em>Tidak Terlihat</em> adalah Gerak yang Sempurna</h2>
+    </div>
+
+    <div class="motion">
+      <article class="card motion-card" data-reveal data-parallax="0.04">
+        <h3>Fluid Head Damping</h3>
+        <p>Friction cairan meredam <em>mikrogetaran</em> dan gerakan tangan yang liar.
+        Hasilnya: putaran halus dengan resistansi konsisten.</p>
+        <div class="wave-demo"><span></span></div>
+      </article>
+      <article class="card motion-card" data-reveal data-parallax="0.08">
+        <h3>Rotational Velocity Control</h3>
+        <p>Kecepatan konstan mencegah artefak <em>rolling shutter</em> ("jello effect")
+        dan distorsi visual pada ujung frame.</p>
+        <div class="speed-demo"><span class="jello"></span><span class="smooth"></span></div>
+        <div class="speed-legend"><span>✕ Jello</span><span>✓ Constant</span></div>
+      </article>
+      <article class="card motion-card" data-reveal data-parallax="0.12">
+        <h3>Ease In / Ease Out</h3>
+        <p><em>Akselerasi bertahap</em> di awal pan, <em>deselerasi lembut</em> menjelang titik
+        berhenti — tanpa hentakan mendadak.</p>
+        <div class="ease-demo">
+          <span class="ease-dot ease-in-out"></span>
+        </div>
+        <div class="speed-legend"><span>0</span><span>Ease In / Out</span><span>1</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4: CHECKLIST ===== -->
+  <section class="section section-alt" id="checklist">
+    <div class="section-head" data-reveal>
+      <p class="kicker">Technical Checklist</p>
+      <h2>Sebelum Roll: <em>Kunci Sistemnya</em></h2>
+      <p class="lede">Centang setiap prasyarat — progress bar menyala saat sistem siap memotret.</p>
+    </div>
+
+    <div class="checklist card" data-reveal data-parallax="0.03">
+      <div class="check-progress">
+        <div class="check-progress-bar"><span id="checkBar"></span></div>
+        <p id="checkStatus">0 / 4 — Sistem belum siap</p>
+      </div>
+      <ul class="check-items" id="checkItems">
+        <li>
+          <label>
+            <input type="checkbox" value="Fluid head terpasang & terkalibrasi" />
+            <span class="check-box" aria-hidden="true"></span>
+            <span class="check-text"><strong>Fluid Head</strong> — checked &amp; damped</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" value="Sumbu vertikal terkunci" />
+            <span class="check-box" aria-hidden="true"></span>
+            <span class="check-text"><strong>Vertical Axis</strong> — locked (Penguncian Sumbu)</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" value="Kecepatan rotasi terkendali" />
+            <span class="check-box" aria-hidden="true"></span>
+            <span class="check-text"><strong>Speed Controlled</strong> — konstan, tanpa jello</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" value="Ease-in / ease-out aktif" />
+            <span class="check-box" aria-hidden="true"></span>
+            <span class="check-text"><strong>Ease In / Out</strong> — aktif di awal &amp; akhir pan</span>
+          </label>
+        </li>
+      </ul>
+      <div class="check-done" id="checkDone">
+        <strong>REC ●</strong> Semua sistem terkunci — pan siap dieksekusi.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-logo">K10<span>.</span>cinema</p>
+      <p>Kelompok 10 · Departemen Sinematografi</p>
+      <p class="footer-meta">Studi Kasus 10 — Psychological Low Angle Camera &nbsp;·&nbsp; Teknik Panning dalam Adegan Dialog</p>
+      <a href="#hero" class="to-top" aria-label="Kembali ke atas">↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
